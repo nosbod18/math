@@ -20,9 +20,9 @@ static inline void  vecN_mul            (T out[N], T a[N], T b[N]);
 
 // Vector
 static inline void  vecN_scale          (T out[N], T a[N], T b);
-static inline T     vecN_dot            (T a[N], T b[N]);
-static inline T     vecN_len2           (T a[N]);
-static inline T     vecN_len            (T a[N]);
+static inline float vecN_dot            (T a[N], T b[N]);
+static inline float vecN_len2           (T a[N]);
+static inline float vecN_len            (T a[N]);
 static inline void  vecN_norm           (T out[N], T a[N]);
 
 // Vector specific
