@@ -3,43 +3,45 @@
 `math.h` is a very minimal vector and matrix math library that only defines the essential functions for
 computer graphics and games.
 
-`smath.h` has almost the same API as `math.h`, except the types are structs and the functions return
-structs instead of taking an `out` parameter. `smath.h` also doesn't have the *\*_copy* funtions.
-
-Since the types are named the same in `math.h` and `smath.h`, only one of the files is meant to be
-used.
+Since this branch uses no types, `smath.h` is not provided.
 
 ## API
 ```c
-typedef float vec2[2];
-typedef float vec3[3];
-typedef float vec4[4];
-typedef vec4  mat4[4];
-
 static inline float fast_sinf           (float x);
 static inline float fast_cosf           (float x);
 static inline float fast_tanf           (float x);
 static inline float fast_sqrtf          (float x);
 
-static inline void  vec##n##_copy       (vec##n out, vec##n a);
-static inline void  vec##n##_add        (vec##n out, vec##n a, vec##n b);
-static inline void  vec##n##_sub        (vec##n out, vec##n a, vec##n b);
-static inline void  vec##n##_mul        (vec##n out, vec##n a, vec##n b);
-static inline void  vec##n##_scale      (vec##n out, vec##n a, float b);
-static inline float vec##n##_dot        (vec##n a, vec##n b);
-static inline float vec##n##_len2       (vec##n a);
-static inline float vec##n##_len        (vec##n a);
-static inline void  vec##n##_norm       (vec##n out, vec##n a);
+// Common
+static inline void  TN_copy             (T out[N], T a[N]);
+static inline void  TN_add              (T out[N], T a[N], T b[N]);
+static inline void  TN_sub              (T out[N], T a[N], T b[N]);
+static inline void  TN_mul              (T out[N], T a[N], T b[N]);
 
-static inline void  vec3_cross          (vec3 out, vec3 a, vec3 b);
+// Vector
+static inline void  TN_scale            (T out[N], T a[N], T b);
+static inline T     TN_dot              (T a[N], T b[N]);
+static inline T     TN_len2             (T a[N]);
+static inline T     TN_len              (T a[N]);
+static inline void  TN_norm             (T out[N], T a[N]);
 
-static inline void  mat4_copy           (mat4 out, mat4 a);
-static inline void  mat4_identity       (mat4 out);
-static inline void  mat4_mul            (mat4 out, mat4 a, mat4 b);
-static inline void  mat4_translate      (mat4 out, vec3 translation);
-static inline void  mat4_rotate         (mat4 out, vec3 axis, float angle);
-static inline void  mat4_scale          (mat4 out, vec3 scale);
-static inline void  mat4_lookat         (mat4 out, vec3 eye, vec3 target, vec3 up);
-static inline void  mat4_perspective    (mat4 out, float fov, float aspect, float near, float far);
-static inline void  mat4_ortho          (mat4 out, float bottom, float top, float left, float right, float near, float far);
+// Vector specific
+static inline void  T3_cross            (T out[3], T a[3], T b[3]);
+
+// Matrix specific
+static inline void  T9_copy             (T out[9], T a[9]);
+static inline void  T9_identity         (T out[9]);
+static inline void  T9_mul              (T out[9], T a[9], T b[9]);
+static inline void  T9_translate        (T out[9], T translation[3]);
+static inline void  T9_rotate           (T out[9], T axis[3], T angle);
+static inline void  T9_scale            (T out[9], T scale[3]);
+static inline void  T16_copy            (T out[16], T a[16]);
+static inline void  T16_identity        (T out[16]);
+static inline void  T16_mul             (T out[16], T a[16], T b[16]);
+static inline void  T16_translate       (T out[16], T translation[3]);
+static inline void  T16_rotate          (T out[16], T axis[3], T angle);
+static inline void  T16_scale           (T out[16], T scale[3]);
+static inline void  T16_lookat          (T out[16], T eye[3], T target[3], T up[3]);
+static inline void  T16_perspective     (T out[16], float fov, float aspect, float near, float far);
+static inline void  T16_ortho           (T out[16], float bottom, float top, float left, float right, float near, float far);
 ```
